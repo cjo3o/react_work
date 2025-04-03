@@ -4,6 +4,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.jsx";
+import User from "./pages/User.jsx";
+
 
 import Header from "./layouts/Header.jsx";
 import Footer from "./layouts/Footer.jsx";
@@ -18,6 +20,7 @@ function App() {
                     <Route path='/' element={<Home/>}></Route>
                     <Route path='/contact' element={<Contact/>}></Route>
                     <Route path='/about' element={<About/>}></Route>
+                    <Route path='/user/:userId' element={<User/>}></Route>
                 </Routes>
                 <Footer></Footer>
             </BrowserRouter>
