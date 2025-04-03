@@ -8,7 +8,7 @@ function User(props) {
     console.log(userId);
     const sign = () => {
         const {data, error} = await signUp('')
-        
+
         Swal.fire({
             icon: "error",
             title: "Oops...",
