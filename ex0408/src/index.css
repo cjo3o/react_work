@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    gap: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+}
+
+.lotto {
+    background-color: skyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
