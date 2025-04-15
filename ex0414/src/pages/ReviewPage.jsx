@@ -1,10 +1,10 @@
 import React from 'react';
 import {Card, Col, Layout, Row} from "antd";
-import styles from './Review.module.css';
+import styles from './ReviewPage.module.css';
 
 const {Content} = Layout;
 
-function Review(props) {
+function ReviewPage(props) {
     return (
         <>
             <Content className={styles.content}>
@@ -24,4 +24,4 @@ function Review(props) {
     );
 }
 
-export default Review;
+export default ReviewPage;
