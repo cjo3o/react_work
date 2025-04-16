@@ -16,6 +16,7 @@ import ReviewPage from "./pages/ReviewPage.jsx";
 import TodoPage from "./pages/TodoPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserAddPage from "./pages/user/UserAddPage.jsx";
+import UserLoginPage from "./pages/user/UserLoginPage.jsx";
 
 const {Header, Sider, Content, Footer} = Layout;
 const {useBreakpoint} = Grid;
@@ -97,7 +98,7 @@ const AppLayout = () => {
                         />
                     )}
                     <div style={{fontSize: '1.1rem', fontWeight: 'bold'}}>
-                        로고 또는 상단 헤더
+                        <Link to={'/user/login'}>로그인</Link>
                     </div>
                 </Header>
 
@@ -109,6 +110,7 @@ const AppLayout = () => {
                     <Route path="/user/list" element={<UserListPage/>}></Route>
                     <Route path="/user/add" element={<UserAddPage/>}></Route>
                     <Route path="/user/remove" element={<TodoPage/>}></Route>
+                    <Route path="/user/login" element={<UserLoginPage/>}></Route>
                 </Routes>
                 {/* 하단 푸터 */}
                 <Footer style={{textAlign: 'center'}}>

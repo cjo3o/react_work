@@ -10,12 +10,6 @@ function UserAddPage(props) {
     const [messageApi, contextHolder] = message.useMessage();
     const [loading, setLoading] = React.useState(false);
     let navigate = useNavigate();
-    const success = () => {
-        messageApi.open({
-            type: 'success',
-            content: 'This is a success message',
-        });
-    };
 
     const onFinish = async (values) => {
         const {name, email, age, phone, password} = values;
@@ -29,8 +23,6 @@ function UserAddPage(props) {
                 message.error('사용자 추가 실패 하였습니다.');
             } else {
                 message.success('사용자 추가 성공');
-
-                console.log("??");
             }
         } catch (error) {
             console.log(error);
@@ -56,7 +48,9 @@ function UserAddPage(props) {
                                 <Form.Item label="나이" name="age" rules={[{required: true, message: '나이를 입력해주세요'}]}>
                                     <Input type="number"/>
                                 </Form.Item>
-                                <Form.Item label="전화번호" name="phone" rules={[{required: true, message: '전화번호를 입력해주세요'}]}>
+                                <Form.Item label="전화번호" name="phone" rules={[
+                                    {required: true, message: '전화번호를 입력해주세요'}
+                                ]}>
                                     <Input/>
                                 </Form.Item>
                                 <Form.Item label="비밀번호" name="password" rules={[{required: true, message: '비밀번호를 입력해주세요'}]}>
