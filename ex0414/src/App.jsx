@@ -69,12 +69,39 @@ const AppLayout = () => {
                 collapsedWidth="0"
                 onBreakpoint={(broken) => setCollapsed(broken)}
             >
-                <div style={{height: 32, margin: 16, background: 'rgba(255,255,255,0.2)'}}/>
+                <div
+                    style={{
+                        height: 32,
+                        margin: 16,
+                        background: 'rgba(255,255,255,0.2)'
+                    }}
+                    onClick={() => {
+                        if (!screens.md) {
+                            setCollapsed(true);
+                        }
+                    }}
+                >
+                    <Link to={'/'}>
+                        <h1 style={{
+                            color: "#fff",
+                            textAlign: "center",
+                            fontSize: "1.6rem",
+                            lineHeight: "32px"
+                        }}>
+                            관리자
+                        </h1>
+                    </Link>
+                </div>
                 <Menu
                     theme="dark"
                     mode="inline"
                     defaultSelectedKeys={['dashboard']}
                     items={items}
+                    onClick={() => {
+                        if (!screens.md) {
+                            setCollapsed(true);
+                        }
+                    }}
                 />
             </Sider>
 

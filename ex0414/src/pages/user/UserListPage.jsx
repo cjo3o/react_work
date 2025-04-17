@@ -10,26 +10,45 @@ function UserListPage(props) {
         {title: "Name", dataIndex: "name"},
         {title: "Email", dataIndex: "email"},
         {title: "Phone", dataIndex: "phone"},
-        {title: "Age", render:() => <Button>dd</Button>}];
+        {title: "Age", render: () => <Button>dd</Button>}];
     const [dataSource, setDataSource] = useState([]);
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-    useEffect( () => {
+    const onSelectedRowChange = (newSelectedRowKeys) => {
+        console.log('선택된행 키');
+        setSelectedRowKeys(newSelectedRowKeys);
+    }
+
+    const rowSelection = {
+        selectedRowKeys: selectedRowKeys,
+        onChange: onSelectedRowChange,
+    };
+
+    useEffect(() => {
         async function loadData() {
             const {data} = await getUsers();
             setDataSource(data);
         }
+
         loadData();
     }, []);
+
     return (
         <Content>
             <Card style={{margin: '1rem'}}>
                 <h1>안녕하세요</h1>
-                <Table columns={columns} dataSource={dataSource} rowKey="id">
+                <Table columns={columns}
+                       dataSource={dataSource}
+                       rowKey="id"
+                       rowSelection={rowSelection}
+                       scroll={{x: "max-content"}}
+                >
 
-                </Table>
-            </Card>
-        </Content>
-    );
+            </Table>
+        </Card>
+</Content>
+)
+    ;
 }
 
 export default UserListPage;
