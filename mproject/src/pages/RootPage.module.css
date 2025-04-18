@@ -1,0 +1,9 @@
+.content {
+    background-color: white;
+    padding: 0 1rem;
+}
+.col {
+    background-color:rgb(100,100,150);
+    padding:1rem;
+    border-radius: 15px;
+}
