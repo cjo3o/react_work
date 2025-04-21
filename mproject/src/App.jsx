@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout, Menu, Button, Grid, Row, Col, Card} from 'antd';
 import {
     MenuFoldOutlined,
@@ -10,13 +10,14 @@ import {
     FundViewOutlined,
 } from '@ant-design/icons';
 
-import {Link, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes, useLocation} from "react-router-dom";
 import RootPage from "./pages/RootPage.jsx";
 import ReviewPage from "./pages/ReviewPage.jsx";
 import TodoPage from "./pages/TodoPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserAddPage from "./pages/user/UserAddPage.jsx";
 import UserLoginPage from "./pages/user/UserLoginPage.jsx";
+import Logout from "./components/Logout.jsx";
 
 const {Header, Sider, Content, Footer} = Layout;
 const {useBreakpoint} = Grid;
@@ -58,6 +59,14 @@ const items = [
 const AppLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const screens = useBreakpoint();
+    const location = useLocation();
+    const selectedKey = location.pathname;
+    const [name, setName] = useState("");
+
+    useEffect(() => {
+        sessionStorage.getItem("name") ? setName(sessionStorage.getItem("name")) : setName("");
+
+    }, [location.pathname]);
 
     return (
         <Layout style={{minHeight: '100vh'}}>
@@ -125,13 +134,14 @@ const AppLayout = () => {
                         />
                     )}
                     <div style={{fontSize: '1.1rem', fontWeight: 'bold'}}>
-                        {
-                            sessionStorage.getItem('name') ?
-                                (<Link to={'/user/login'} onClick={() => {
-                                    sessionStorage.clear();
-                                }}>로그아웃</Link>) :
-                                (<Link to={'/user/login'}>로그인</Link>)
-                        }
+                        <span style={{marginRight: '2rem'}}>{name && `${name}님 안녕하세요`}</span>
+                        <Button type="primary">
+                            {
+                                name ?
+                                    (<Logout></Logout>) :
+                                    (<Link to={'/user/login'}>로그인</Link>)
+                            }
+                        </Button>
                     </div>
                 </Header>
 

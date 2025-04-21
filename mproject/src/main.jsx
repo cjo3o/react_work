@@ -3,6 +3,7 @@ import { unstableSetRender } from 'antd';
 import './index.css'
 import App from './App.jsx'
 import {BrowserRouter} from "react-router-dom";
+import {registerSW} from "virtual:pwa-register";
 
 unstableSetRender((node, container) => {
     container._reactRoot ||= createRoot(container);
