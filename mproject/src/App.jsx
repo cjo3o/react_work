@@ -12,12 +12,14 @@ import {
 
 import {Link, Route, Routes, useLocation} from "react-router-dom";
 import RootPage from "./pages/RootPage.jsx";
-import ReviewPage from "./pages/ReviewPage.jsx";
-import TodoPage from "./pages/TodoPage.jsx";
+import ReviewPage from "./pages/review/ReviewPage.jsx";
+import TodoPage from "./pages/todo/TodoPage.jsx";
 import UserListPage from "./pages/user/UserListPage.jsx";
 import UserAddPage from "./pages/user/UserAddPage.jsx";
 import UserLoginPage from "./pages/user/UserLoginPage.jsx";
 import Logout from "./components/Logout.jsx";
+import TodoAddPage from "./pages/todo/TodoAddPage.jsx";
+import ReviewAddPage from "./pages/review/ReviewAddPage.jsx";
 
 const {Header, Sider, Content, Footer} = Layout;
 const {useBreakpoint} = Grid;
@@ -30,14 +32,22 @@ const items = [
         label: (<Link to='/'>대시보드</Link>),
     },
     {
-        key: 'review',
+        key: 'todo',
         icon: <FundViewOutlined/>,
-        label: (<Link to='/todo'>할일</Link>),
+        label: "todo",
+        children: [
+            {key: '/todo/list', label: <Link to="/todo/list">TodoList</Link>},
+            {key: '/todo/Add', label: <Link to="/todo/Add">TodoAdd</Link>}
+        ]
     },
     {
-        key: 'menu1',
+        key: 'review',
         icon: <InfoOutlined/>,
-        label: (<Link to='/review'>리뷰</Link>),
+        label: 'review',
+        children: [
+            {key: '/review/list', label: <Link to="/review/list">ReviewList</Link>},
+            {key: '/review/Add', label: <Link to="/review/Add">ReviewAdd</Link>}
+        ]
     },
     {
         key: 'users',
@@ -133,7 +143,7 @@ const AppLayout = () => {
                             style={{fontSize: 20}}
                         />
                     )}
-                    <div style={{fontSize: '1.1rem', fontWeight: 'bold'}}>
+                    <div style={{fontSize: '1.1rem', fontWeight: 'bold', whiteSpace: 'nowrap'}}>
                         <span style={{marginRight: '2rem'}}>{name && `${name}님 안녕하세요`}</span>
                         <Button type="primary">
                             {
@@ -149,11 +159,18 @@ const AppLayout = () => {
                 <Routes>
                     <Route path="/" element={<RootPage/>}></Route>
                     <Route path="/review" element={<ReviewPage/>}></Route>
-                    <Route path="/todo" element={<TodoPage/>}></Route>
                     <Route path="/user/list" element={<UserListPage/>}></Route>
                     <Route path="/user/add" element={<UserAddPage/>}></Route>
                     <Route path="/user/remove" element={<TodoPage/>}></Route>
                     <Route path="/user/login" element={<UserLoginPage/>}></Route>
+                    <Route path="/todo">
+                        <Route path="list" element={<TodoPage/>}></Route>
+                        <Route path="add" element={<TodoAddPage/>}></Route>
+                    </Route>
+                    <Route path="/review">
+                        <Route path="list" element={<ReviewPage/>}></Route>
+                        <Route path="add" element={<ReviewAddPage/>}></Route>
+                    </Route>
                 </Routes>
                 {/* 하단 푸터 */}
                 <Footer style={{textAlign: 'center'}}>
