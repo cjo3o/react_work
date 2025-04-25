@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Layout, Row, Table, Tag } from "antd";
+import {Button, Card, Col, Layout, Row, Table, Tag} from "antd";
+import {useNavigate} from "react-router-dom";
 
 const { Content } = Layout;
 
 function TodoPage() {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('https://dummyjson.com/todos')
+        fetch('https://6809e08b1f1a52874cde2c58.mockapi.io/todos')
             .then(res => res.json())
             .then(data => {
-                setTodos(data.todos); // API는 { todos: [...] } 형태로 응답
+                const sortedData = data.sort((a, b) => b.id - a.id);
+                setTodos(sortedData); // API는 { todos: [...] } 형태로 응답
                 setLoading(false);
+                console.log(data);
             });
     }, []);
 
@@ -50,6 +54,7 @@ function TodoPage() {
     return (
         <Content>
             <Card title="📋 Todo 목록 (API)">
+                <Button style={{margin:"1rem 0"}} type="primary" onClick={() => {navigate('todo/modify/3')}}>수정</Button>
                 <Table
                     dataSource={todos}
                     columns={columns}
