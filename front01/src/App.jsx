@@ -6,6 +6,7 @@ import dbusers from "./users.json";
 function App() {
     // const [users, setUsers] = useState([{'name': '홍길동', 'password': '1234'}]);
     const [users, setUsers] = useState(dbusers);
+    console.log(users);
     const getUsers = async (event) => {
         const result = await axios.get('https://port-0-back01-manacntt27a3e0c2.sel4.cloudtype.app/')
         const {data, status} = result;
