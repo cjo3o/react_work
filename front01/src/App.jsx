@@ -2,26 +2,30 @@ import './App.css';
 import axios from 'axios';
 import {useState} from "react";
 import dbusers from "./users.json";
+import AirComponent from "./components/AirComponent.jsx";
+
+const backUrl = import.meta.env.VITE_BACK_URL;
 
 function App() {
     // const [users, setUsers] = useState([{'name': '홍길동', 'password': '1234'}]);
     const [users, setUsers] = useState(null);
     const [supausers, setSupaUsers] = useState(null);
     const getUsers = async (event) => {
-        const result = await axios.get('http://localhost:8080/')
+        const result = await axios.get(backUrl);
         const {data, status} = result;
 
         setUsers(data);
     }
 
     const getSupaUsers = async (event) => {
-        const {data} = await axios.get('http://localhost:8080/supauser')
+        const {data} = await axios.get(`${backUrl}supauser`);
 
         setSupaUsers(data);
     }
 
     return (
         <>
+            <AirComponent></AirComponent>
             <div className={'text-3xl'}>
                 안녕
             </div>
